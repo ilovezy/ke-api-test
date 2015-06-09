@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title></title>
+    <link rel="stylesheet" href="materialize/css/materialize.min.css" />
+    <link rel="stylesheet" href="kindeditor-4.1.10/themes/simple/simple.css" />
+    <style>
+    .ke-container{
+        width: 400px;border-radius: 10px;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2 class="center-align">kindeditor 测试1</h2>
+        <textarea class="form-control" id="ccEditor"></textarea>
+    </div>
+
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="materialize/js/materialize.min.js"></script>
+    <script src="kindeditor-4.1.10/kindeditor-all-min.js"></script>
+
+    <script type="text/javascript">
+        'use strict'
+         // var editor = KindEditor.create('textarea#editor')
+        var editor
+         KindEditor.ready(function(K) {
+            editor = K.create('#ccEditor', {
+                width: '100%', // 有个最小宽度的这里，默认为 650px，宽度可以为百分比
+                height: '30px', // 有最小高度, 默认为 100px，单位只能为 px
+                minWidth: '100px',
+                minHeight: '100px', //这两个都可以设置的，单位只能为 px
+                // 编辑工具栏的工具，用 '/' 标识换行，用 '|' 标识分隔符，在页面显示为 '|', 数据类型为数组
+                items: ['source', '|', 'undo', 'redo', '|',
+                    'preview', 'print', 'template',
+                    'code', 'cut', 'copy', 'paste',
+                    'plainpaste', 'wordpaste', '|',
+                    'justifyleft', 'justifycenter',
+                    'justifyright',
+                    'justifyfull', 'insertorderedlist',
+                    'insertunorderedlist', 'indent',
+                    'outdent', 'subscript',
+                    'superscript', 'clearhtml',
+                    'quickformat', 'selectall', '|',
+                    'fullscreen', '/',
+                    'formatblock', 'fontname', 'fontsize',
+                    '|', 'forecolor', 'hilitecolor',
+                    'bold',
+                    'italic', 'underline',
+                    'strikethrough', 'lineheight',
+                    'removeformat', '|', 'image',
+                    'multiimage',
+                    'flash', 'media', 'insertfile',
+                    'table', 'hr', 'emoticons',
+                    'baidumap', 'pagebreak',
+                    'anchor', 'link', 'unlink'
+                ], 
+                noDisableItems: ['source', 'fullscreen'],  // 这个暂时不明 ?
+                filterMode: false,  // 过滤 html 标签，默认为 true，例如把 < 换成 &lt;
+                wellFormatMode: false, // 美化html 数据，默认为true
+                resizeType: 1, // 2, 1, 0；对应 resize: horizontal, vertical, none, 默认为2
+                themeType: 'simple',   // 选择主题，需引入对应css, default, qq, simple, 
+                // simple平板化，qq按钮比较少
+                langType: 'zh_CN', // 默认为 zh_CH, 可设 en，需引入 lang/[langType].js, 一般不用
+                designMode: true, // 可视化模式或代码模式 ？
+                fullscreenMode: false,  // 设为true默认全屏，默认为false, 由全屏按钮触发
+                // basePath: 'String', //这个基本不改，自己会获取
+                // themesPath:  不用改，自己获取
+                // pluginsPath: 自己获取的
+                // langPath: 自己获取
+                minChangeSize: 10, //默认为 5，undo/redo文字输入的变化，测试一下就知道了，输入多少 undo 和redo返回多少变化的字符
+                // urlType: // ?
+                newlineTag: 'br', // 默认为 p ，即输入回车之后的换行标签，可设 br, p
+                pasteType: 2, // 0, 1, 2, 0禁止黏贴，1纯文本黏贴，2 HTML黏贴
+                dialogAlighType: 'page',  // 可设 ^, page，知道page按当前页居中，为空按编辑器居中, ?暂时不明
+                shadowMode: true, // 弹出框阴影，可拿图片上传测试看看
+                // zIndex: Int, // 默认 811213 反正很高就是了
+                useContextmenu: false, // 上传个图片看看，右键启用，默认为true
+                // syncType: // 同步 form 提交，暂时不明
+                indentChar: false, // html代码缩进, 点击 source 按钮可见换行效果，默认为true
+
+                // 以下的 3个可以看 firebug，尽量别改 class 名字吧，覆盖就行
+                // cssPath: // 默认为空，不明
+                // cssData: // 设置可视化区域样式，不明
+                // bodyClass: // 设置 iframe document body 的className，默认为 ke-content 
+
+                // colorTable: [], // 设置颜色板的颜色, 在改变字体颜色的按钮里看到
+
+                afterCreate: function(){
+                    console.log('created')
+                }, // 创建 editor 之后的回调，默认为空
+                
+                // afterTab: function(){
+                //     console.log('tabbed')
+                // }, // 按 tab 之后回调，默认为插入4个空格, 即 &nbsp; 插入4个
+                
+                afterBlur: function(){
+                    console.log('afterBlur')
+                }, // 编辑器失去焦点的回调，默认为空
+
+                afterUpload: function(url){
+                    console.log(url)
+                }, // 上传完文件后的回调，默认空
+
+                // uploadJson: 'String', // 指定上传文件服务端程序，默认为 bathPath + 'php/upload_json.php'
+
+                // fileManagerJson: '', // 浏览远程图片的服务端，默认 bathPath + 'php/file_manager_json.php'
+
+                allowImageUpload: false, 
+                allowFlashUpload: false, 
+                allowMediaUpload: false, 
+                allowFileUpload: false, 
+                allowFileManager: false, 
+                fontSizeTable: ['20px', '49px', '2em'], // 可选择字体大小，在更改字体大小选项里看到
+
+                // imageTabIndex: int, // 图片谭楚楚默认显示标签索引，不明
+                // formatUploadUrl: ture // 自动格式化上传后的URL，默认为true，不明
+                fullscreenShortcur: true, // false 时禁用 ESC 全屏快捷键，不明
+
+                extraFileUploadParams: {
+                    item_id: 1000, 
+                    category_id: 1
+                }, // 上传图片，flash, 视频音频，文件，添加其他参数一并传到服务器
+
+                filePostName: 'imgFile', // 指定上传文件 form 名称，默认为 imgFile
+
+                afterSelectFile: function(){
+                    console.log('select')
+                }, // 从图片空间选择文件后执行回调，不明
+                
+                // pagebreakHtml: // 指定分页符html, 不明
+
+                allowImageRemote: false, // true默认，显示网络图片标签，false不显示
+
+                allowHeightMode: false // 引入 autoheight.js自动调整高度，默认false
+            })
+        })
+    </script>
+</body>
+
+</html>
