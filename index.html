@@ -11,6 +11,10 @@
     .ke-container{
         width: 400px;border-radius: 10px;
     }
+    .ke-icon-ccHome{
+        background: red;
+        width: 16px;height: 16px
+    }
     </style>
 </head>
 
@@ -27,37 +31,18 @@
     <script type="text/javascript">
         'use strict'
          // var editor = KindEditor.create('textarea#editor')
-        var editor
-         KindEditor.ready(function(K) {
+        var editor;
+        
+        KindEditor.lang({ccHome: 'cc怀念zyzy'});
+
+        KindEditor.ready(function(K) {
             editor = K.create('#ccEditor', {
                 width: '100%', // 有个最小宽度的这里，默认为 650px，宽度可以为百分比
-                height: '30px', // 有最小高度, 默认为 100px，单位只能为 px
+                height: '200px', // 有最小高度, 默认为 100px，单位只能为 px
                 minWidth: '100px',
                 minHeight: '100px', //这两个都可以设置的，单位只能为 px
                 // 编辑工具栏的工具，用 '/' 标识换行，用 '|' 标识分隔符，在页面显示为 '|', 数据类型为数组
-                items: ['source', '|', 'undo', 'redo', '|',
-                    'preview', 'print', 'template',
-                    'code', 'cut', 'copy', 'paste',
-                    'plainpaste', 'wordpaste', '|',
-                    'justifyleft', 'justifycenter',
-                    'justifyright',
-                    'justifyfull', 'insertorderedlist',
-                    'insertunorderedlist', 'indent',
-                    'outdent', 'subscript',
-                    'superscript', 'clearhtml',
-                    'quickformat', 'selectall', '|',
-                    'fullscreen', '/',
-                    'formatblock', 'fontname', 'fontsize',
-                    '|', 'forecolor', 'hilitecolor',
-                    'bold',
-                    'italic', 'underline',
-                    'strikethrough', 'lineheight',
-                    'removeformat', '|', 'image',
-                    'multiimage',
-                    'flash', 'media', 'insertfile',
-                    'table', 'hr', 'emoticons',
-                    'baidumap', 'pagebreak',
-                    'anchor', 'link', 'unlink'
+                items: ['source', 'unlink', '|', 'ccHome'
                 ], 
                 noDisableItems: ['source', 'fullscreen'],  // 这个暂时不明 ?
                 filterMode: false,  // 过滤 html 标签，默认为 true，例如把 < 换成 &lt;
