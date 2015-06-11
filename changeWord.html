@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title></title>
+    <link rel="stylesheet" href="materialize/css/materialize.min.css" />
+    <link rel="stylesheet" href="kindeditor-4.1.10/themes/simple/simple.css" />
+    <style>
+        @media only screen and (max-width: 601px) {
+            .container {
+                width: 100%;
+            }
+        }
+        .container {
+            padding: 0 1rem;
+        }
+        .container .row {
+            margin-left: -0.5rem;
+            margin-right: -0.5rem
+        }
+        .row .col {
+            padding: 0 0.5rem
+        }
+        .ke-icon-ccHome {
+            background: red;
+            width: 16px;
+            height: 16px
+        }
+        .ke-icon-ccTransform {
+            background: green;
+            width: 16px;
+            height: 16px
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2 class="center-align">kindeditor 测试1</h2>
+        <form id="testForm">
+            <textarea class="form-control" id="ccEditor" name="ccEditor"></textarea>
+        </form>
+        <button id="getContent" class="btn waves-effect">get content</button>
+        <button id="createEditor" class="btn waves-effect green">create content</button>
+        <button id="removeEditor" class="btn waves-effect orange">remove content</button>
+        <br />
+        <br />
+        <h4>数据在这里</h4>
+        <div id="showContent" class="card-panel grey white-text" style="word-break: break-word"></div>
+        <h4>最终效果在这里</h4>
+        <div id="showHtml" class="card-panel" style="word-break: break-word"></div>
+    </div>
+
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="materialize/js/materialize.min.js"></script>
+    <script src="kindeditor-4.1.10/kindeditor-all.js"></script>
+
+    <script type="text/javascript">
+        'use strict'
+        KindEditor.lang({
+            ccPlugin: 'cc怀念zyzy',
+            ccTransform: 'ccTransform在这里，点点看把'
+        });
+        KindEditor.ready(function(K) {
+            var editor = K.create('#ccEditor', {
+                width: '100%', // 有个最小宽度的这里，默认为 650px，宽度可以为百分比
+                height: '400px', // 有最小高度, 默认为 100px，单位只能为 px
+                // 编辑工具栏的工具，用 '/' 标识换行，用 '|' 标识分隔符，在页面显示为 '|', 数据类型为数组
+                items: [
+                    'source', '|',
+                    'preview', 'print', 'template',
+                    'plainpaste', 'wordpaste', '|',
+                    'justifyleft', 'justifycenter',
+                    'justifyright',
+                    'justifyfull', 'insertorderedlist',
+                    'insertunorderedlist', 'indent',
+                    'outdent', 'subscript',
+                    'superscript', 'clearhtml',
+                    'quickformat', 'selectall', '|',
+                    '/',
+                    'formatblock', 'fontname', 'fontsize',
+                    '|', 'forecolor', 'hilitecolor',
+                    'bold',
+                    'italic', 'underline',
+                    'strikethrough', 'lineheight',
+                    'removeformat', 'ccPlugin',
+                    'ccTransform'
+                ],
+                themeType: 'simple', // 选择主题，需引入对应css, default, qq, simple, 
+                // simple平板化，qq按钮比较少
+                designMode: true, // 可视化模式或代码模式 ？
+                afterBlur: function() {
+                    console.log('afterBlur')
+                    this.sync() // 必须加上这句才能通过 .val() 获取 textarea的值
+                }, // 编辑器失去焦点的回调，默认为空
+                fontSizeTable: ['20px', '10px', '12px'] // 可选择字体大小，在更改字体大小选项里看到
+            })
+        })
+
+         // jquery
+        function getContent() {
+            var $getContent = $('#getContent');
+            $getContent.on('click', function() {
+                var $testForm = decodeURIComponent($('#testForm')
+                        .serialize()),
+                    $showContent = $('#showContent'),
+                    $showHtml = $('#showHtml'),
+                    $content = $('#ccEditor').val();
+
+                $showContent.text($content);
+                $showHtml.html($content);
+            });
+        }
+        getContent()
+
+        var $createEditor = $('#createEditor');
+        $createEditor.click(function() {
+            KindEditor.create('#ccEditor', {
+                height: '400px',
+                afterCreate: function() {
+
+                }
+            })
+        })
+        var $removeEditor = $('#removeEditor');
+        $removeEditor.click(function() {
+            KindEditor.remove('#ccEditor')
+        })
+    </script>
+</body>
+
+</html>

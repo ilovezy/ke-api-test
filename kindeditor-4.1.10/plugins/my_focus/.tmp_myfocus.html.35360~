@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>myFocus</title>
+		<link rel="stylesheet" href="myfocus.css">
+		<script type="text/javascript" src="myfocus.js"></script>
+	</head>
+	<body>
+		<div class="main">
+			<div id="urlbox">
+				<div class="mask"></div>
+				<div class="sel"></div>
+			</div>
+			<form id="uploadForm" name="uploadForm" method="post" enctype="multipart/form-data" target="uploadIframe">
+				<input type="hidden" id="editorId" name="id" value="" />
+				<input type="hidden" id="referMethod" name="referMethod" value="" />
+				<ul class="table">
+					<li>
+						<label for="width"><span>显示大小</span></label>&nbsp;
+						<span>宽度</span> <input type="text" id="width" name="width" value="100" maxlength="4" style="width:50px;text-align:right;" />
+						<span>高度</span> <input type="text" id="height" name="height" value="100" maxlength="4" style="width:50px;text-align:right;" />
+						&nbsp;<label><span>固定大小 </span></label>
+						<input type="checkbox" id="fixedSize" checked="checked" name="fixedSize"/>
+					</li>
+					<li>
+						<label for="pattern"><span>插件风格</span></label>&nbsp;
+						<select style="vertical-align:middle; " name="pattern" id="pattern">
+							<option value="mF_fscreen_tb">渐显切换1-带底部横向缩略图索引按钮</option>
+							<option value="mF_games_tb">渐显切换2-带底部横向缩略图索引按钮</option>
+							<option value="mF_expo2010">渐显切换3-带底部横向数字索引按钮</option>
+							<option value="mF_mF_ladyQ">渐显切换4-带底部横向数字索引按钮</option>
+							<option value="mF_sohusports">渐显切换5-带底部横向数字索引按钮</option>
+							<option value="mF_pconline">渐显切换6-带底部横向数字索引按钮</option>
+							<option value="mF_classicHC">渐显切换7-带底部横向数字索引按钮</option>
+							<option value="mF_liquid">特效切换1-带底部横向数字索引按钮</option>
+							<option value="mF_mF_classicHB">特效切换2-带底部横向数字索引按钮</option>
+							<option value="mF_slide3D">特效切换3-带底部横向数字索引按钮</option>
+							<option value="mF_kiki">特效切换4-带底部横向索引按钮和前后按钮</option>
+							<option value="mF_pithy_tb">向上切换1-带右部纵向缩略图索引按钮</option>
+							<option value="mF_taobao2010">向上切换2-带底部横向数字索引按钮</option>
+							<option value="mF_taobaomall">向上切换3-带底部横向标题索引按钮</option>
+							<option value="mF_qiyi">向左切换1-带底部横向数字索引按钮</option>
+							<option value="mF_tbhuabao">左右切换-带左右切换按钮</option>
+						</select>
+					</li>
+					<li>
+						<label>显示图片</label>&nbsp;<input id="add-row-btn" type="button" style='padding:1px 5px;' onclick="addRow()" value='添加一项'/>&nbsp;&nbsp;<span>点击显示的图片对其修改</span>
+						<div id="listbox">
+							<table border="0" width="100%" cellpadding="0" cellspacing="0">
+								<tbody id="listtab">
+								<tr class="trbg" style="display:none;">
+									<td class='left'><a tabindex="-1" href="###"  onclick="showCfg.call(this.parentNode.parentNode,'urlbox');return false;" title='单击添加或修改显示图片'><img onerror="replaceImg.call(this,'')" class="default" src='blank.gif'/></a></td>
+									<td class='right'>
+										<div class="textbox">
+										<div><label>标题:</label>&nbsp;<input class="text" type='text' name="title"/></div>
+										<div><label>连接:</label>&nbsp;<input class="text" type='text' value="#" name="link"/></div>
+										<div><label>说明:</label>&nbsp;<textarea class="text" name="explain"></textarea></div>
+										</div>
+										<div class="urlbox" style="display:none;">
+											<label>图片地址:</label><br/><input type='text' name="imgsrc"/>
+											<div style="padding-top:5px; text-align:left;"><input type="button" onclick="showFileManager.call(this.parentNode.parentNode.parentNode.parentNode);" value="浏览..."><input type="button"  onclick="showCfg.call(this.parentNode.parentNode.parentNode.parentNode,'textbox');return;" value=" 完成 "/></div>
+										</div>
+									</td>
+									<td class='last'><a href="###" title="删除此项" onclick="delRow(this.parentNode.parentNode);return false;"><img border="0" src="delete.png"/></a></td>
+								</tr>
+								</tbody>
+							</table>
+						</div>
+					</li>
+				</ul>
+			</form>
+		</div>
+	</body>
+</html>
