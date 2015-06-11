@@ -18,10 +18,11 @@
     <h2 class="center-align"></h2>
     <form id="ccForm">
         <textarea class="form-control" name="content" id="ccEditor"></textarea>
+    </form>
         <button id="getContent" class="btn waves-effect">get content</button>
         <button id="createEditor" class="btn waves-effect green">create content</button>
         <button id="removeEditor" class="btn waves-effect orange">remove content</button>
-    </form>
+        <button id="getHtml" class="btn waves-effect orange">getHtml</button>
 </div>
 
 <script src="js/jquery-1.11.1.min.js"></script>    
@@ -31,17 +32,43 @@
 'use strict'
 
 $(function(){
-    
+
 var $getContent = $('#getContent'), 
     $createEditor = $('#createEditor'), 
-    $removeEditor = $('#removeEditor')
+    $removeEditor = $('#removeEditor'), 
+    $getHtml = $('#getHtml'), 
+    editorId = '#ccEditor';
+
+var editor = KindEditor.create(editorId, {
+    height: '400px'
+})
+editor.loadPlugin('table', function(){
+    alert('success table')
+})
+if(editor.isEmpty()){
+    console.log('随便写点啥')
+}
+    
+$createEditor.click(function(){
+    KindEditor.create(editorId, {
+        height: '400px'
+    })
+})
+
+$removeEditor.click(function(){
+    KindEditor.remove(editorId)
+})
+
+$getHtml.click(function(){
+    
+})
+
 
 
 
 
 
 })
-
 
 </script>
 </body>
