@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title></title>
+    <link rel="stylesheet" href="materialize/css/materialize.min.css" />
+    <style>
+        @media only screen and (max-width: 601px) {
+            .container {
+                width: 100%;
+            }
+        }
+        .container {
+            padding: 0 1rem;
+        }
+        .container .row {
+            margin-left: -0.5rem;
+            margin-right: -0.5rem
+        }
+        .row .col {
+            padding: 0 0.5rem
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2 class="center-align"></h2>
+        <form>
+            <textarea class="form-control" id="content" name="content"></textarea>
+
+        </form>
+            <button class="btn waves-effect">click</button>
+            <h4>代码</h4>
+            <div class="card-panel" id="showCode"></div>
+            <h4>实际效果</h4>
+            <div class="card-panel" id="showContent"></div>
+    </div>
+
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="materialize/js/materialize.min.js"></script>
+    <script src="kindeditor-4.1.10/kindeditor-all.js"></script>
+    <script type="text/javascript">
+        'use strict'
+        KindEditor.create('#content', {
+            width: '100%', 
+            afterBlur: function(){
+                this.sync()
+            }
+        })
+        $('button').click(function(){
+            var content = $('#content').val()
+            $('#showCode').text(content)
+            $('#showContent').html(content)
+        })
+        
+    </script>
+</body>
+</body>
+
+</html>

@@ -22,7 +22,7 @@
         <button id="getContent" class="btn waves-effect">get content</button>
         <button id="createEditor" class="btn waves-effect green">create content</button>
         <button id="removeEditor" class="btn waves-effect orange">remove content</button>
-        <button id="getHtml" class="btn waves-effect orange">getHtml</button>
+        <button id="getHtml" class="btn waves-effect green lighten-2">getHtml</button>
 </div>
 
 <script src="js/jquery-1.11.1.min.js"></script>    
@@ -40,33 +40,52 @@ var $getContent = $('#getContent'),
     editorId = '#ccEditor';
 
 var editor = KindEditor.create(editorId, {
+    width: '100%', 
     height: '400px'
 })
 editor.loadPlugin('table', function(){
-    alert('success table')
+    console.log('success table')
 })
-if(editor.isEmpty()){
-    console.log('随便写点啥')
-}
-    
 $createEditor.click(function(){
-    KindEditor.create(editorId, {
+    editor.create('#ccEditor', {
+        width: '100%', 
         height: '400px'
     })
 })
-
 $removeEditor.click(function(){
-    KindEditor.remove(editorId)
+    editor.remove('#ccEditor')
 })
 
-$getHtml.click(function(){
-    
+// k.wedget(options)
+var widget = KindEditor.widget({
+    z: 100, 
+    width: 200, 
+    height: 100, 
+    html: '这是一个菜单', 
+    css: {
+        background: 'grey', 
+        color: 'white'
+    }
 })
 
+// menu API
+var menu = KindEditor.menu({
+    width: 200, 
+    x: 100, 
+    z: 1000, 
+    centerLineMode: false
+})
 
-
-
-
+KindEditor.each('15px, 20px'.split(','), function(i, val){
+    menu.addItem({
+        title: '<span style="font-size:"' + val + '>' + val + '</span>', 
+        click: function(){
+            console.log(val)
+        }, 
+        height: parseInt(val, 10) + 5, 
+        checked: val === '5px'
+    })
+})
 
 })
 
