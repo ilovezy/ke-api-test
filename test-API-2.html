@@ -32,11 +32,11 @@
             <textarea class="form-control" id="content" name="content"></textarea>
 
         </form>
-            <button class="btn waves-effect">click</button>
-            <h4>代码</h4>
-            <div class="card-panel" id="showCode"></div>
-            <h4>实际效果</h4>
-            <div class="card-panel" id="showContent"></div>
+        <button class="btn waves-effect">click</button>
+        <h4>代码</h4>
+        <div class="card-panel" id="showCode"></div>
+        <h4>实际效果</h4>
+        <div class="card-panel" id="showContent"></div>
     </div>
 
     <script src="js/jquery-1.11.1.min.js"></script>
@@ -44,18 +44,36 @@
     <script src="kindeditor-4.1.10/kindeditor-all.js"></script>
     <script type="text/javascript">
         'use strict'
-        KindEditor.create('#content', {
-            width: '100%', 
-            afterBlur: function(){
+        var contentId = '#content'
+        var editor = KindEditor.create(contentId, {
+            width: '100%',
+            afterBlur: function() {
                 this.sync()
             }
         })
-        $('button').click(function(){
+    
+         $('button').click(function() {
+            KindEditor.insertHtml(contentId, '<strong>HTML</strong>') // 这个效果没啥用, 两种写法都行，这种是传id参数了
+            var html = editor.html() // 这个效果和 $('#content').val() 一样，不过是从editor里获取的
+            var fullHtml = editor.fullHtml() // 就多了一个 <!doctype html>，其他和 .html()效果一样
+            var text = editor.text() // 只有上面的insertHtml() 的内容，没啥用
+            editor.text('<p>your thsaofdf</p>') // 这个会替代掉上面的 InsertHtml()，且标签被转格式;例如&lg;
+            var selectedHtml = editor.selectedHtml() // 获取被选中的内容，好像没啥用
+            var isEmpty = editor.isEmpty() // 如果有内容，图片，或者其他啥的就显示 true，不过这里好像一直显示false，主要用于表单判断
+            editor.appendHtml(
+                    '<p class="card-panel orange" style="color: red">appendHtml</p>'
+                ) // 而且写入的 class并不会在编辑器里显示，因为是iframe, 但是会在最终效果里显示的，但是如果是style就可以有效果
+            editor.exec('hr')
+            
             var content = $('#content').val()
             $('#showCode').text(content)
             $('#showContent').html(content)
+            console.log(html)
+            console.log(fullHtml)
+            console.log(text)
+            console.log(selectedHtml)
+            console.log(isEmpty)
         })
-        
     </script>
 </body>
 </body>
