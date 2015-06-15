@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title></title>
+    <link rel="stylesheet" href="bootstrap-3.2.0-dist/css/bootstrap.min.css" />
+    <style>
+        * {
+            outline: none!important
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2 class="text-center">KindEditor 插件</h2>
+        <form id="ccForm">
+            <textarea class="form-control" id="ccEditor" name="something"></textarea>
+        </form>
+        <button class="btn btn-success" id="text">text</button>
+        <button class="btn btn-info" id="html">html</button>
+        <button class="btn btn-warning" id="selectedHtml">selectedHtml</button>
+        <hr />
+        <div class="well" id="showText"></div>
+        <div class="well" id="showHtml"></div>
+        <div class="well" id="showSelectedHtml"></div>
+    </div>
+    <!-- <script src="js/jquery&#45;1.11.1.min.js"></script> -->
+    <!-- <script src="bootstrap&#45;3.2.0&#45;dist/js/bootstrap.min.js"></script> -->
+    <script src="kindeditor-4.1.10/kindeditor-all-min.js"></script>
+    <script type="text/javascript">
+        'use strict'
+
+        KindEditor.lang({
+            'ccNoIndent': '你在哪儿能看到我',
+            'source': '居然想看源代码',
+        });
+
+        KindEditor.ready(function(K) {
+            // 设置编辑器
+            var editor = K.create('#ccEditor', {
+                width: '100%',
+                items: ['source', '|', 'undo', 'redo', '|',
+                    'preview', 'print', 'template',
+                    'code', 'cut', 'copy', 'paste',
+                    'plainpaste', 'wordpaste', '|',
+                    'justifyleft', 'justifycenter',
+                    'justifyright',
+                    'justifyfull', 'insertorderedlist',
+                    'insertunorderedlist', 'indent',
+                    'outdent', 'subscript',
+                    'superscript', 'clearhtml',
+                    'quickformat', 'selectall', '|',
+                    'fullscreen', '/',
+                    'formatblock', 'fontname', 'fontsize',
+                    '|', 'forecolor', 'hilitecolor',
+                    'bold',
+                    'italic', 'underline',
+                    'strikethrough', 'lineheight',
+                    'removeformat', '|', 'image',
+                    'multiimage',
+                    'flash', 'media', 'insertfile',
+                    'table', 'hr', 'emoticons',
+                    'baidumap', 'pagebreak',
+                    'anchor', 'link', 'unlink', '|',
+                    'about', 'ccNoIndent', 'ccBlockquote'
+                ],
+                cssPath: ['./kindeditor-4.1.10/plugins/ccBlockquote/ccBlockquote.css'], 
+                afterBlur: function() {
+                    // or this.sync() 把iframe里的内容直接同步到 textarea 中
+                    editor.sync()
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>
+
