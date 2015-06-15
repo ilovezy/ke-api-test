@@ -6163,7 +6163,6 @@ KindEditor.lang({
 		h2 : '标题 2',
 		h3 : '标题 3',
 		h4 : '标题 4',
-        // h6 : 'tellyouwhat',  
 		p : '正 文'
 	},
 	'fontname.fontName' : {

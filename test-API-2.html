@@ -50,9 +50,9 @@
             afterBlur: function() {
                 this.sync()
             }
-        })
-    
-         $('button').click(function() {
+        });
+
+        $('button').click(function() {
             KindEditor.insertHtml(contentId, '<strong>HTML</strong>') // 这个效果没啥用, 两种写法都行，这种是传id参数了
             var html = editor.html() // 这个效果和 $('#content').val() 一样，不过是从editor里获取的
             var fullHtml = editor.fullHtml() // 就多了一个 <!doctype html>，其他和 .html()效果一样
@@ -64,7 +64,7 @@
                     '<p class="card-panel orange" style="color: red">appendHtml</p>'
                 ) // 而且写入的 class并不会在编辑器里显示，因为是iframe, 但是会在最终效果里显示的，但是如果是style就可以有效果
             editor.exec('hr')
-            
+
             var content = $('#content').val()
             $('#showCode').text(content)
             $('#showContent').html(content)

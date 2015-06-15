@@ -1,0 +1,18 @@
+blockquote {
+    border: 0;
+    background: rgb(245, 245, 245);
+    border-left: 3px solid rgb(0, 255, 255);
+    margin-left: 2em;
+    padding: 0.5em;
+    font-size: 1.1em;
+    display: block;
+    margin: 1em 0;
+    white-space: pre
+}
+
+blockquote{
+width: 630px;
+margin: 1em auto;
+padding: 1em;
+         white-space: pre-wrap
+}
