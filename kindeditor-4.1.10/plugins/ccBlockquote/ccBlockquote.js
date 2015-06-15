@@ -3,7 +3,7 @@
 KindEditor.plugin('ccBlockquote', function(K) {
     var self = this,
         name = 'ccBlockquote';
-    self.clickToolbar(name, function() {
+    self.clickToolbar(name, function(K) {
         var lang = self.lang(name + '.'),
             // html = [
             //     '<div style="padding: 10px 20px">',
