@@ -48,8 +48,8 @@
         KindEditor.lang({
             'ccNoIndent': '你在哪儿能看到我',
             'source': '居然想看源代码',
-            'ccBlockquote': '插入引用',
-            'ccBlockquote.pleaseInput': '请输入引用文本'
+            // 'ccBlockquote': '插入引用',
+            // 'ccBlockquote.pleaseInput': '请输入引用文本'
         });
 
         KindEditor.ready(function(K) {
@@ -79,10 +79,7 @@
                     'table', 'hr', 'emoticons',
                     'baidumap', 'pagebreak',
                     'anchor', 'link', 'unlink', '|',
-                    'about', 'ccNoIndent', 'ccBlockquote'
-                ],
-                cssPath: [
-                    './kindeditor-4.1.10/plugins/ccBlockquote/ccBlockquote.css'
+                    'about', 'ccNoIndent'
                 ],
                 afterBlur: function() {
                     // or this.sync() 把iframe里的内容直接同步到 textarea 中
