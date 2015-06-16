@@ -31,7 +31,7 @@ KindEditor.lang({
 })
 KindEditor.plugin('example', function(K){
     var self = this, name = 'example';
-    function click(value){
+    function clickToAddClass(value){
         var cmd = self.cmd
         if(value === 'adv_strikethrough'){
             cmd.wrap('<span style="background: #e53333; text-decoration: line-through"></span>')
@@ -47,33 +47,39 @@ KindEditor.plugin('example', function(K){
             width: 150
         });
         menu.addItem({
+            title: '顶头缩进', 
+            click: function(){
+                clickToAddClass('noIndent')
+            }
+        })
+        menu.addItem({
             title: '红底白字', 
             click: function(){
-                click('text-danger')
+                clickToAddClass('text-danger')
             }
         });
         menu.addItem({
             title: '黄底白字', 
             click: function(){
-                click('yellow')
+                clickToAddClass('panel panel-warning')
             }
         });
         menu.addItem({
             title: '绿底白字', 
             click: function(){
-                click('green')
+                clickToAddClass('text-success')
             }
         });
         menu.addItem({
             title: '黑底白字', 
             click: function(){
-                click('black')
+                clickToAddClass('text-primary')
             }
         });
         menu.addItem({
             title: '自定义删除线', 
             click: function(){
-                click('adv_strikethrough')
+                clickToAddClass('adv_strikethrough')
             }
         });
     })
