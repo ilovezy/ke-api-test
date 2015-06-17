@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title></title>
+    <link rel="stylesheet" href="bootstrap-3.2.0-dist/css/bootstrap.min.css" />
+    <style>
+        * {
+            outline: none!important
+        }
+        .ke-icon-example {
+            background: red;
+            width: 16px;
+            height: 16px
+        }
+        .ke-icon-ccPreview {
+            background: green;
+            width: 16px;
+            height: 16px
+        }
+        #showHtml p {
+            text-indent: 2em
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <h2 class="text-center">自定义插件, 非常重要, 结合bootstrap</h2>
+        <div class="row">
+            <div class="col-sm-6">
+                <textarea class="form-control" id="ccEditor" name="content"></textarea>
+                <button class="btn btn-info" id="btnShowHtml">btnShowHtml</button>
+            </div>
+            <div class="col-sm-4">
+                <h3>showHtml</h3>
+                <div id="showHtml" class="well"></div>
+                <h3>showText</h3>
+                <div id="showText" class="well"></div>
+            </div>
+        </div>
+    </div>
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+    <script src="kindeditor-4.1.10/kindeditor-all.js"></script>
+    <script type="text/javascript">
+        'use strict'
+        KindEditor.lang({
+            example: '设置class样式',
+            ccPreview: 'cc预览'
+        })
+         KindEditor.plugin('example', function(K) {
+            var self = this,
+                name = 'example';
+
+            function clickToAddClass(value) {
+                var cmd = self.cmd
+                if (value === 'adv_strikethrough') {
+                    // cmd.wrap('<span style="text-decoration: line-through"></span>')
+                    cmd.wrap('<s></s>')
+                } else {
+                    console.log(cmd.selectHtml)
+                    cmd.wrap('<span class="' + value +
+                            '"></span>')
+                        // cmd.selectall() 
+                        // cmd.justifyleft()
+                        // cmd.justifyright()
+                        // cmd.createlink('http://www.baidu.com', '_blank')
+                        // cmd.print()
+                        // cmd.hr()
+                }
+                // cmd.select()
+                self.hideMenu()
+            }
+            self.clickToolbar(name, function() {
+                var menu = self.createMenu({
+                    name: name,
+                    width: 150
+                });
+                menu.addItem({
+                    title: '顶头缩进',
+                    click: function() {
+                        clickToAddClass(
+                            'noIndent')
+                    }
+                })
+                menu.addItem({
+                    title: 'text-danger',
+                    click: function() {
+                        clickToAddClass(
+                            'text-danger')
+                    }
+                })
+                menu.addItem({
+                    title: 'alert alert-info',
+                    click: function() {
+                        clickToAddClass(
+                            'alert alert-info'
+                        )
+                    }
+                })
+                menu.addItem({
+                    title: '自定义删除线',
+                    click: function() {
+                        clickToAddClass(
+                            'adv_strikethrough'
+                        )
+                    }
+                });
+            })
+        });
+
+        KindEditor.ready(function(K) {
+            var editor = K.create('#ccEditor', {
+                pasteType: 1,
+                resizeType: 1,
+                width: '100%',
+                height: '400px',
+
+                cssPath: [
+                    'bootstrap-3.2.0-dist/css/bootstrap.min.css'
+                ],
+                // 这里的cssPath会在 iframe 中引用
+                items: ['source', '|', 'undo', 'redo', '|',
+                    'preview', 'print', 'template',
+                    'code', 'cut', 'copy', 'paste',
+                    'plainpaste', 'wordpaste', '|',
+                    'justifyleft', 'justifycenter',
+                    'justifyright',
+                    'justifyfull', 'insertorderedlist',
+                    'insertunorderedlist', 'indent',
+                    'outdent', 'subscript',
+                    'superscript', 'clearhtml',
+                    'quickformat', 'selectall', '|',
+                    'fullscreen', '/',
+                    'formatblock', 'fontname', 'fontsize',
+                    '|', 'forecolor', 'hilitecolor',
+                    'bold',
+                    'italic', 'underline',
+                    'strikethrough', 'lineheight',
+                    'removeformat', '|', 'image',
+                    'multiimage',
+                    'flash', 'media', 'insertfile',
+                    'table', 'hr', 'emoticons',
+                    'baidumap', 'pagebreak', 'example',
+                    'ccPreview'
+                ],
+                autoHeightMode: true,
+                afterBlur: function() {
+                    this.sync()
+                }
+            })
+
+            // jquery 展示html
+            var $btnShowHtml = $('#btnShowHtml'),
+                $showHtml = $('#showHtml'),
+                $showText = $('#showText');
+
+            $btnShowHtml.click(function() {
+                var html = editor.html()
+                $showHtml.html(html)
+                $showText.text(html)
+            })
+
+
+
+            // 加个preview按钮
+            KindEditor.plugin('ccPreview', function(K) {
+                    var self = this,
+                        name = 'ccPreview';
+                    self.clickToolbar(name, function() {
+                        var ccHtml = editor.html();
+                        if ($('#ccPreview')) {
+                            $('#ccPreview').remove()
+
+                            if (ccHtml !== '') {
+                                var ccDialog = $(
+                                    '<div id="ccPreview" style="padding: 15px; width: 50%;border: 1px solid #eee; border-radius: 4px;position: absolute; left: 500px; top: 100px; background: white;z-indent: 99999;box-shadow: 2px 2px 1px 1px grey;">' +
+                                    ccHtml +
+                                    '<hr/><button class="btn btn-default pull-right" id="closePreview">关闭</button></div>'
+                                )
+                                $(document.body).append(
+                                    ccDialog)
+                                $('#closePreview').click(
+                                    function() {
+                                        $(this).parent(
+                                            'div'
+                                        ).fadeOut()
+                                    })
+                            }
+                        }
+                    })
+                })
+                // 加个preview按钮 over
+        })
+    </script>
+</body>
+
+</html>

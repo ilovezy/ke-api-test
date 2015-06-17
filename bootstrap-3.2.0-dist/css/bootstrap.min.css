@@ -1,3 +1,11 @@
+.noIndent{
+    text-indent: 0!important;
+    font-size: 20px;
+    font-weight: 700
+}
+p{
+    text-indent: 2em!important
+}
 /*!
  * Bootstrap v3.2.0 (http://getbootstrap.com)
  * Copyright 2011-2014 Twitter, Inc.

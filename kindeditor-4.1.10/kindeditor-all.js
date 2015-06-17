@@ -6162,7 +6162,7 @@ KindEditor.lang({
 		h1 : '标题 1',
 		h2 : '标题 2',
 		h3 : '标题 3',
-		h4 : '标题 4',
+		h4 : '顶格正文',
 		p : '正 文'
 	},
 	'fontname.fontName' : {
@@ -9299,8 +9299,8 @@ KindEditor.plugin('preview', function(K) {
 	var self = this, name = 'preview', undefined;
 	self.clickToolbar(name, function() {
 		var lang = self.lang(name + '.'),
-			html = '<div style="padding:10px 20px;">' +
-				'<iframe class="ke-textarea" frameborder="0" style="width:708px;height:400px;"></iframe>' +
+			html = '<div style="padding:20px;">' + 
+				'<iframe class="ke-textarea" frameborder="0" style="width:708px;height:400px;">' +
 				'</div>',
 			dialog = self.createDialog({
 				name : name,
@@ -9313,8 +9313,15 @@ KindEditor.plugin('preview', function(K) {
 		doc.open();
 		doc.write(self.fullHtml());
 		doc.close();
-		K(doc.body).css('background-color', '#FFF');
-		iframe[0].contentWindow.focus();
+		K(doc.body).css({'background-color': '#FFF', 'padding': '20px'});
+
+        // by fhc
+        var cssPath = Toolkit.page.getAbsoluteUrl('toolkitjs/v5/bootstrap/css/bootstrap.min.css');
+        // var cssPath = 'toolkitjs/v5/bootstrap/css/bootstrap.min.css';
+        K(doc.head).append('<link rel="stylesheet" href="' + cssPath + '" />');
+        // by fhc over
+		
+        iframe[0].contentWindow.focus();
 	});
 });
 /*******************************************************************************
@@ -9363,7 +9370,7 @@ KindEditor.plugin('quickformat', function(K) {
 			child = next;
 		}
 		K.each(nodeList, function(i, subList) {
-			var wrapper = K('<p style="text-indent:2em;"></p>', doc);
+			var wrapper = K('<p style="text-indent:2em"></p>', doc);
 			subList[0].before(wrapper);
 			K.each(subList, function(i, knode) {
 				wrapper.append(knode);
