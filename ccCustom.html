@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+<<<<<<< HEAD
 
 <head>
     <meta charset="utf-8">
@@ -24,10 +25,26 @@
             text-indent: 2em
         }
     </style>
+=======
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title></title>
+<link rel="stylesheet" href="bootstrap-3.2.0-dist/css/bootstrap.min.css" />
+<style>
+*{outline: none!important}
+.ke-icon-example{
+    background: red;
+    width: 16px;
+    height: 16px
+}
+</style>
+>>>>>>> 91748f346988e8366ab60f734954a68f62a6c8bc
 </head>
 
 <body>
 
+<<<<<<< HEAD
     <div class="container-fluid">
         <h2 class="text-center">自定义插件, 非常重要, 结合bootstrap</h2>
         <div class="row">
@@ -199,4 +216,83 @@
     </script>
 </body>
 
+=======
+<div class="container">
+    <h2 class="text-center">自定义插件, 非常重要, 结合bootstrap</h2>
+    <textarea class="form-control" id="ccEditor" name="content"></textarea>
+</div>
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+<script src="kindeditor-4.1.10/kindeditor-all.js"></script>
+<script type="text/javascript">
+'use strict'
+KindEditor.lang({
+    example: '设置class样式'
+})
+KindEditor.plugin('example', function(K){
+    var self = this, name = 'example';
+    function clickToAddClass(value){
+        var cmd = self.cmd
+        if(value === 'adv_strikethrough'){
+            cmd.wrap('<span style="background: #e53333; text-decoration: line-through"></span>')
+        }else{
+            cmd.wrap('<span class="' + value + '"></span>')
+        }
+        cmd.select()
+        self.hideMenu()
+    }
+    self.clickToolbar(name, function(){
+        var menu = self.createMenu({
+            name: name, 
+            width: 150
+        });
+        menu.addItem({
+            title: '顶头缩进', 
+            click: function(){
+                clickToAddClass('noIndent')
+            }
+        })
+        menu.addItem({
+            title: '红底白字', 
+            click: function(){
+                clickToAddClass('text-danger')
+            }
+        });
+        menu.addItem({
+            title: '黄底白字', 
+            click: function(){
+                clickToAddClass('panel panel-warning')
+            }
+        });
+        menu.addItem({
+            title: '绿底白字', 
+            click: function(){
+                clickToAddClass('text-success')
+            }
+        });
+        menu.addItem({
+            title: '黑底白字', 
+            click: function(){
+                clickToAddClass('text-primary')
+            }
+        });
+        menu.addItem({
+            title: '自定义删除线', 
+            click: function(){
+                clickToAddClass('adv_strikethrough')
+            }
+        });
+    })
+})
+
+KindEditor.ready(function(K){
+    K.create('#ccEditor', {
+        cssPath: ['bootstrap-3.2.0-dist/css/bootstrap.min.css'],
+        // 这里的cssPath会在 iframe 中引用
+        items: ['source', 'removeformat', 'example', 'code']
+    })
+})
+</script>
+</body>
+>>>>>>> 91748f346988e8366ab60f734954a68f62a6c8bc
 </html>

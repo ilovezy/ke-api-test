@@ -1,10 +1,14 @@
 .noIndent{
+<<<<<<< HEAD
     text-indent: 0!important;
     font-size: 20px;
     font-weight: 700
 }
 p{
     text-indent: 2em!important
+=======
+    text-indent: 0!important
+>>>>>>> 91748f346988e8366ab60f734954a68f62a6c8bc
 }
 /*!
  * Bootstrap v3.2.0 (http://getbootstrap.com)
